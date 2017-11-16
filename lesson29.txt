@@ -1,7 +1,0 @@
-- Check WebDriver / WebElement Javadocs and play with its main features.
-- Learn xpath / css basics: http://automated-testing.info/t/sbornik-poleznyh-ssylok-po-lokatoram/5316
-- Create any simple test using WebDriver API.
-- Use WebDriver manager library for local drivers' management.
-- Move driver initialization / cleanup staff outside tests,
-so that a new instance could be raised before test execution and closed after.
-- Use either inheritance or listeners for that.
