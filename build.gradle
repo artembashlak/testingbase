@@ -1,0 +1,51 @@
+plugins {
+    id 'ru.vyarus.quality' version '2.4.0'
+}
+
+group 'wdsample'
+version '0.0.1'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+}
+
+ext {
+    testngVersion = '6.12'
+    seleniumVersion = '2.41.0'
+    dataSupplierVersion = '1.3.0'
+    streamexVersion = '0.6.6'
+    lombokVersion = '1.16.18'
+    assertjVersion = '3.8.0'
+    gsonVersion = '2.8.2'
+    jexelapiVersion = '2.6.12'
+    commonlang3Version = '3.7'
+    joorVersion = '0.9.6'
+    webdrivermanagerVersion = '1.7.2'
+}
+dependencies {
+    compile("org.testng:testng:${testngVersion}",
+            "org.seleniumhq.selenium:selenium-java:${seleniumVersion}",
+            "io.github.sskorol:test-data-supplier:${dataSupplierVersion}",
+            "one.util:streamex:${streamexVersion}",
+            "org.projectlombok:lombok:${lombokVersion}",
+            "org.assertj:assertj-core:${assertjVersion}",
+            "com.google.code.gson:gson:${gsonVersion}",
+            "net.sourceforge.jexcelapi:jxl:${jexelapiVersion}",
+            "org.apache.commons:commons-lang3:${commonlang3Version}",
+            "org.jooq:joor:${joorVersion}",
+            "io.github.bonigarcia:webdrivermanager:${webdrivermanagerVersion}"
+    )
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion '4.3'
+}
+test {
+    useTestNG() {
+        suites 'src/test/resources/smoke-suite.xml'
+    }
+}
