@@ -3,7 +3,7 @@
     <test name = "Chrome Smoke">
     <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="."/>
+            <class name="com.company.SimpleTest"/>
 
         </classes>
     </test>
@@ -11,7 +11,7 @@
     <test name = "FF Smoke">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name=""/>
+            <class name="com.company.SimpleTest"/>
         </classes>
     </test>
 </suite>
