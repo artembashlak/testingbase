@@ -8,6 +8,10 @@ import org.openqa.selenium.support.ui.Wait;
 
 import static core.DriverSetup.getDriver;
 
+/**
+ * Pages will be extended from here.got
+ */
+
 public abstract class BasePage<T> {
 
     private static final String BASE_URL = "https://github.com";
@@ -17,7 +21,7 @@ public abstract class BasePage<T> {
     public T openPage(Class<T> clazz) {
         T page = PageFactory.initElements(getDriver(), clazz);
         getDriver().get(BASE_URL + getPageUrl());
-        ExpectedCondition pageLoadCondition = ((BasePage<Object>) page).getPageLoadCondition();
+        final ExpectedCondition pageLoadCondition = ((BasePage<Object>) page).getPageLoadCondition();
         waitForPageToLoad(pageLoadCondition);
         return page;
     }

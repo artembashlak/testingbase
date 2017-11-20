@@ -3,6 +3,10 @@ package pages;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
+/**
+ * Home page of github will be here.
+ */
+
 public class GitHubHomePage extends BasePage<GitHubHomePage> {
 
     @Override
