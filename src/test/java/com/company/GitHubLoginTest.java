@@ -10,7 +10,7 @@ import static core.DriverSetup.getDriver;
 public class GitHubLoginTest {
 
         @Test
-        public void login_with_valid_credentials() {
+        public void loginWIthValidCredentials() {
             GitHubLoginPage loginPage = new GitHubHomePage().open().goToLoginPage();
             loginPage.login("user", "password");
         }
