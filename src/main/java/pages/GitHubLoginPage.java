@@ -1,8 +1,10 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static core.WebDriverListener.getDriver;
+import static org.openqa.selenium.support.ui.ExpectedConditions.*;
 
 /**
  * Page object representing github login page.
@@ -19,9 +21,10 @@ public class GitHubLoginPage {
     }
 
     public void login(String login, String password) {
-        getDriver().findElement(loginField).sendKeys(login);
-        getDriver().findElement(passwordField).sendKeys(password);
-        getDriver().findElement(commitButton).click();
+        final WebDriverWait wait = new WebDriverWait(getDriver(), 5);
+        wait.until(elementToBeClickable(loginField)).sendKeys(login);
+        wait.until(elementToBeClickable(passwordField)).sendKeys(password);
+        wait.until(elementToBeClickable(commitButton)).click();
     }
 
     public boolean isLoginError() {
