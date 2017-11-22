@@ -46,6 +46,8 @@ task wrapper(type: Wrapper) {
 }
 test {
     useTestNG() {
+        listeners << 'listeners.TestListener'
+        listeners << 'core.WebDriverListener'
         suites 'src/test/resources/smoke-suite.xml'
     }
 }

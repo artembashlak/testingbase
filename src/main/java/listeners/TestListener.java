@@ -14,28 +14,28 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult result) {
-        log.info("Now I'm starting testing : %s.%s",
+        log.info("Now I'm starting testing : %s, %s",
                 result.getTestClass().getName(), result.getMethod().getMethodName());
     }
 
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        log.info("PASS : %s.%s",
-                result.getTestClass().getName(), result.getMethod().getMethodName());
+        log.info("PASS : %s, %s",
+                result.getTestClass().getName(), result.getTestName());
     }
 
 
     @Override
     public void onTestFailure(ITestResult result) {
-        log.info("FAIL : %s.%s",
+        log.info("FAIL : %s, %s",
                 result.getTestClass().getName(), result.getMethod().getMethodName());
     }
 
 
     @Override
     public void onTestSkipped(ITestResult result) {
-        log.info("SKIP : %s.%s",
+        log.info("SKIP : %s, %s",
                 result.getTestClass().getName(), result.getMethod().getMethodName());
     }
 

@@ -1,49 +1,34 @@
 package pages;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.By;
+
+import static core.WebDriverListener.getDriver;
 
 /**
  * Page object representing github login page.
  */
-public class GitHubLoginPage extends BasePage<GitHubLoginPage> {
+public class GitHubLoginPage {
 
-    @FindBy(id = "login_field")
-    WebElement loginField;
+    private By loginField = By.cssSelector("#login_field");
+    private By passwordField = By.name("password");
+    private By commitButton = By.name("commit");
+    private By errorBox = By.className("flash-error");
 
-    @FindBy(name = "password")
-    WebElement passwordField;
-
-    @FindBy(name = "commit")
-    WebElement commitButton;
-
-    @FindBy(className = "flash-error")
-    WebElement errorBox;
-
-    @Override
-    protected ExpectedCondition getPageLoadCondition() {
-        return ExpectedConditions.visibilityOf(loginField);
-    }
-
-    @Override
     public String getPageUrl() {
-        return "/login";
+        return "https://github.com/";
     }
 
     public void login(String login, String password) {
-        loginField.sendKeys(login);
-        passwordField.sendKeys(password);
-        commitButton.click();
-
+        getDriver().findElement(loginField).sendKeys(login);
+        getDriver().findElement(passwordField).sendKeys(password);
+        getDriver().findElement(commitButton).click();
     }
 
     public boolean isLoginError() {
-        return errorBox.isDisplayed();
+        return getDriver().findElement(errorBox).isDisplayed();
     }
 
     public String getErrorMessage() {
-        return errorBox.getText();
+        return getDriver().findElement(errorBox).getText();
     }
 }

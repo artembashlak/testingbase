@@ -11,8 +11,6 @@ public class FakeLoginData {
     public static Object[][] emptyPassword() {
         return new Object[][]{
                 {"user@gmail.com", ""},
-                {"user@gmail2.com", "  "}
-
-        };
+                {"user@gmail2.com", "  "}};
     }
 }
