@@ -1,4 +1,4 @@
-package data;
+package com.waverleysoftware.data;
 
 import org.testng.annotations.DataProvider;
 

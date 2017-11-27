@@ -1,9 +1,9 @@
-package data;
+package com.waverleysoftware.data;
 
 import org.testng.annotations.DataProvider;
 
 /**
- *Class that will provide data of User.
+ *Class that will provide com.waverleysoftware.data of User.
  */
 public class CorrectLoginData {
 
