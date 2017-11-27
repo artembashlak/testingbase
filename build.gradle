@@ -30,10 +30,10 @@ ext {
 dependencies {
     compile("org.testng:testng:${testngVersion}",
             "org.seleniumhq.selenium:selenium-java:${seleniumVersion}",
-            //"io.github.sskorol:test-com.waverleysoftware.data-supplier:${dataSupplierVersion}",
+            "io.github.sskorol:test-data-supplier:${dataSupplierVersion}",
             "one.util:streamex:${streamexVersion}",
             "org.projectlombok:lombok:${lombokVersion}",
-            //"org.assertj:assertj-com.waverleysoftware.core:${assertjVersion}",
+            "org.assertj:assertj-core:${assertjVersion}",
             "com.google.code.gson:gson:${gsonVersion}",
             "net.sourceforge.jexcelapi:jxl:${jexelapiVersion}",
             "org.apache.commons:commons-lang3:${commonlang3Version}",
