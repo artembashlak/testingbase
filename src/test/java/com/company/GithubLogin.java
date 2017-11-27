@@ -1,24 +1,17 @@
 package com.company;
 
+import com.waverleysoftware.pages.GitHubLoginPage;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.Test;
-import com.waverleysoftware.pages.GitHubLoginPage;
 
-import static com.waverleysoftware.BaseConfig.BASE_CONFIG;
-import static com.waverleysoftware.core.WebDriverListener.getDriver;
+import static com.waverleysoftware.core.PageFactory.open;
 
-/**
- * Simple login : github.com
- */
-
+/** Simple login : github.com */
 @Slf4j
 public class GithubLogin {
 
   @Test
   public void loginWIthValidCredentials() throws InterruptedException {
-    getDriver().get(BASE_CONFIG.url());
-
-      new GitHubLoginPage()
-            .login("artembashlak@gmail.com", "hello123.");
+    open(GitHubLoginPage.class).login("artembashlak@gmail.com", "hello123.");
   }
 }
