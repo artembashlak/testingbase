@@ -1,6 +1,7 @@
 package com.waverleysoftware.core;
 
 import io.qameta.allure.Step;
+import jdk.nashorn.internal.objects.annotations.Function;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,7 +27,7 @@ public abstract class BasePage implements Page {
   }
 
   protected void type(final By locator, final CharSequence text, WaitCondition condition) {
-    elementOf(waitFor(locator, condition)).sendKeys(text);
+    elementOf(waitFor(locator, "",condition)).sendKeys(text);
   }
 
   protected void type(final By locator, final CharSequence text) {
@@ -38,7 +39,7 @@ public abstract class BasePage implements Page {
   }
 
   protected List<String> getTextNodes(final By locator, final WaitCondition condition) {
-    return streamOf(waitFor(locator, condition)).map(WebElement::getText).toList();
+    return streamOf(waitFor(locator, "", condition)).map(WebElement::getText).toList();
   }
 
   @Step("Navigate to {url}")
@@ -48,7 +49,7 @@ public abstract class BasePage implements Page {
   }
 
   @SuppressWarnings("unchecked")
-  private <T> T waitFor(final By locator, WaitCondition condition) {
-    return (T) wait.until(condition.getType().apply(locator));
+  private <T, V, R> R waitFor(final T arg1, final V arg2, final WaitCondition condition) {
+    return (R) wait.until((java.util.function.Function<WebDriver,?>) condition.getType().apply(arg1,arg2));
   }
 }
