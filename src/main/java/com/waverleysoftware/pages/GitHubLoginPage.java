@@ -1,12 +1,13 @@
 package com.waverleysoftware.pages;
 
 import com.waverleysoftware.core.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static com.waverleysoftware.BaseConfig.BASE_CONFIG;
 import static com.waverleysoftware.core.WaitCondition.visible;
-import static com.waverleysoftware.core.WebDriverListener.getDriver;
+import static io.github.sskorol.listeners.BaseListener.getDriverMetaData;
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 
 /** Page object representing github login Page. */
@@ -16,8 +17,9 @@ public class GitHubLoginPage extends BasePage {
   private By passwordField = By.name("password");
   private By commitButton = By.name("commit");
   private By errorBox = By.className("flash-error");
-  private WebDriverWait wait = new WebDriverWait(getDriver(), BASE_CONFIG.waitTimeout());
+  private WebDriverWait wait = new WebDriverWait(getDriverMetaData()._1, BASE_CONFIG.waitTimeout());
 
+  @Step("Send correct credentials to login: \"{login}\", \"{password}\"")
   public void login(String login, String password) {
     type(loginField, login, visible);
     type(passwordField, password, visible);
@@ -25,11 +27,11 @@ public class GitHubLoginPage extends BasePage {
   }
 
   public boolean isLoginError() {
-    return getDriver().findElement(errorBox).isDisplayed();
+    return getDriverMetaData()._1.findElement(errorBox).isDisplayed();
   }
 
   public String getErrorMessage() {
-    return getDriver().findElement(errorBox).getText();
+    return getDriverMetaData()._1.findElement(errorBox).getText();
   }
 
   @Override

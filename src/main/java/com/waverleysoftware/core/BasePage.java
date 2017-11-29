@@ -1,5 +1,6 @@
 package com.waverleysoftware.core;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,12 +8,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-import static com.waverleysoftware.BaseConfig.BASE_CONFIG;
 import static com.waverleysoftware.core.WaitCondition.allVisible;
 import static com.waverleysoftware.core.WaitCondition.visible;
-import static com.waverleysoftware.core.WebDriverListener.getDriver;
 import static com.waverleysoftware.utils.ElementTypeUtils.elementOf;
 import static com.waverleysoftware.utils.ElementTypeUtils.streamOf;
+import static io.github.sskorol.listeners.BaseListener.getDriverMetaData;
 
 /** Base Page for all pages. */
 public abstract class BasePage implements Page {
@@ -21,8 +21,8 @@ public abstract class BasePage implements Page {
   private final WebDriverWait wait;
 
   public BasePage() {
-    this.driver = getDriver();
-    this.wait = new WebDriverWait(driver, BASE_CONFIG.waitTimeout());
+    this.driver = getDriverMetaData()._1;
+    this.wait = getDriverMetaData()._2;
   }
 
   protected void type(final By locator, final CharSequence text, WaitCondition condition) {
@@ -41,8 +41,9 @@ public abstract class BasePage implements Page {
     return streamOf(waitFor(locator, condition)).map(WebElement::getText).toList();
   }
 
-  public Page navigateTo() {
-    driver.get(url());
+  @Step("Navigate to {url}")
+  public Page navigateTo(final String url) {
+    driver.get(url);
     return this;
   }
 
