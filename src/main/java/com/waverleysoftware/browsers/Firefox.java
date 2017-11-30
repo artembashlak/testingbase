@@ -4,9 +4,7 @@ import io.github.sskorol.config.XmlConfig;
 import io.github.sskorol.core.Browser;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.firefox.FirefoxOptions;
-/**
- * Init browser Firefox start here with webdriver supplier library.
- */
+/** Init browser Firefox start here with webdriver supplier library. */
 public class Firefox implements Browser {
 
     public Name name() {

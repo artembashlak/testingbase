@@ -9,14 +9,13 @@ import org.aeonbits.owner.Reloadable;
 @Config.Sources("classpath:config.properties")
 public interface BaseConfig extends Config, Reloadable {
 
-  BaseConfig BASE_CONFIG =
-      ConfigFactory.create(BaseConfig.class, System.getenv(), System.getProperties());
+    BaseConfig BASE_CONFIG = ConfigFactory.create(BaseConfig.class, System.getenv(), System.getProperties());
 
-  @Key("explicit.wait.timeout")
+    @Key("explicit.wait.timeout")
   @DefaultValue("3")
   long waitTimeout();
 
-  @DefaultValue("https://github.com")
+    @DefaultValue("https://github.com")
   @Key("url")
   String url();
 }

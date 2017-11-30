@@ -1,55 +1,55 @@
 package com.waverleysoftware.core;
 
-import io.qameta.allure.Step;
-import jdk.nashorn.internal.objects.annotations.Function;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
-
 import static com.waverleysoftware.core.WaitCondition.allVisible;
 import static com.waverleysoftware.core.WaitCondition.visible;
 import static com.waverleysoftware.utils.ElementTypeUtils.elementOf;
 import static com.waverleysoftware.utils.ElementTypeUtils.streamOf;
 import static io.github.sskorol.listeners.BaseListener.getDriverMetaData;
 
+import io.qameta.allure.Step;
+import java.util.List;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 /** Base Page for all pages. */
 public abstract class BasePage implements Page {
 
-  private WebDriver driver;
-  private final WebDriverWait wait;
+    private final WebDriverWait wait;
+    private WebDriver driver;
 
-  public BasePage() {
-    this.driver = getDriverMetaData()._1;
-    this.wait = getDriverMetaData()._2;
-  }
+    public BasePage() {
+        this.driver = getDriverMetaData()._1;
+        this.wait = getDriverMetaData()._2;
+    }
 
-  protected void type(final By locator, final CharSequence text, WaitCondition condition) {
-    elementOf(waitFor(locator, "",condition)).sendKeys(text);
-  }
+    protected void type(final By locator, final CharSequence text, WaitCondition condition) {
+        elementOf(waitFor(locator, "", condition)).sendKeys(text);
+    }
 
-  protected void type(final By locator, final CharSequence text) {
-    type(locator, text, visible);
-  }
+    protected void type(final By locator, final CharSequence text) {
+        type(locator, text, visible);
+    }
 
-  protected List<String> getTextNodes(final By locator) {
-    return getTextNodes(locator, allVisible);
-  }
+    protected List<String> getTextNodes(final By locator) {
+        return getTextNodes(locator, allVisible);
+    }
 
-  protected List<String> getTextNodes(final By locator, final WaitCondition condition) {
-    return streamOf(waitFor(locator, "", condition)).map(WebElement::getText).toList();
-  }
+    protected List<String> getTextNodes(final By locator, final WaitCondition condition) {
+        return streamOf(waitFor(locator, "", condition)).map(WebElement::getText).toList();
+    }
 
-  @Step("Navigate to {url}")
+    @Step("Navigate to {url}")
   public Page navigateTo(final String url) {
-    driver.get(url);
-    return this;
-  }
+        driver.get(url);
+        return this;
+    }
 
-  @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
   private <T, V, R> R waitFor(final T arg1, final V arg2, final WaitCondition condition) {
-    return (R) wait.until((java.util.function.Function<WebDriver,?>) condition.getType().apply(arg1,arg2));
-  }
+        return (R)
+        wait.until(
+            (java.util.function.Function<WebDriver, ?>) condition.getType().apply(arg1, arg2));
+    }
 }

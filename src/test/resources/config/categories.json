@@ -1,11 +1,16 @@
 [
   {
     "name": "Failed Configuration",
-    "matchedStatuses": [ "skipped" ]
+    "matchedStatuses": [
+      "skipped"
+    ]
   },
   {
     "name": "Infrastructure problems",
     "traceRegex": ".*RuntimeException.*",
-    "matchedStatuses": [ "broken", "failed" ]
-  },
+    "matchedStatuses": [
+      "broken",
+      "failed"
+    ]
+  }
 ]
