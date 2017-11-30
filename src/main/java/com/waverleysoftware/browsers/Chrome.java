@@ -13,17 +13,16 @@ public class Chrome implements Browser {
     public Name name() {
         return Name.Chrome;
     }
-
     @Override
     public boolean isRemote() { return true; }
 
     @Override
     public Capabilities configuration(final XmlConfig config) {
         final ChromeOptions options = new ChromeOptions();
-        options.setCapability("enableVNC", "true");
-        options.setCapability("enableVideo", "true");
+        options.setCapability("enableVNC", true);
+        options.setCapability("enableVideo",true);
         options.setCapability("name", config.getTestName());
-        options.setCapability("screenResolution", "1028*1024*24");
+        options.setCapability("screenResolution", "1028x1024x24");
         return merge(config, options);
     }
 }
