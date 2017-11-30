@@ -2,7 +2,7 @@
 <suite name="Smoke Suite" parallel="tests" thread-count="2">
     <test name="Chrome Smoke">
         <parameter name="browserName" value="chrome"/>
-        <parameter name="platform" value="ANY"/>
+        <parameter name="platform" value="LINUX"/>
         <classes>
             <class name="com.company.GithubLogin"/>
         </classes>
