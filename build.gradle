@@ -1,5 +1,6 @@
 plugins {
     id 'ru.vyarus.quality' version '2.4.0'
+    id 'io.qameta.allure' version '2.5'
 }
 
 group 'wdsample'
@@ -11,6 +12,10 @@ sourceCompatibility = 1.8
 
 repositories {
     jcenter()
+}
+
+configurations {
+    agent
 }
 
 ext {
@@ -25,8 +30,12 @@ ext {
     commonlang3Version = '3.7'
     joorVersion = '0.9.6'
     webdrivermanagerVersion = '1.7.2'
+    ownerVersion = '1.0.4'
+    webdriverSupplierVersion = '0.7.1'
+    allureVersion = '2.0-BETA21'
 }
 dependencies {
+    agent 'org.aspectj:aspectjweaver:1.8.10'
     compile("org.testng:testng:${testngVersion}",
             "org.seleniumhq.selenium:selenium-java:${seleniumVersion}",
             "io.github.sskorol:test-data-supplier:${dataSupplierVersion}",
@@ -37,15 +46,40 @@ dependencies {
             "net.sourceforge.jexcelapi:jxl:${jexelapiVersion}",
             "org.apache.commons:commons-lang3:${commonlang3Version}",
             "org.jooq:joor:${joorVersion}",
-            "io.github.bonigarcia:webdrivermanager:${webdrivermanagerVersion}"
+            "io.github.bonigarcia:webdrivermanager:${webdrivermanagerVersion}",
+            "org.aeonbits.owner:owner:${ownerVersion}",
+            "io.github.sskorol:webdriver-supplier:${webdriverSupplierVersion}",
+            "io.qameta.allure:allure-testng:${allureVersion}"
     )
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion '4.3'
+    gradleVersion '4.3.1'
 }
+
+task copyConfig(type: Copy) {
+    from 'src/test/resources/config'
+    into 'build/allure-results'
+}
+
 test {
+
+    doFirst {
+        jvmArgs "-javaagent:${configurations.agent.singleFile}"
+    }
+
     useTestNG() {
+        listeners << 'io.github.sskorol.listeners.BeforeMethodListener'
         suites 'src/test/resources/smoke-suite.xml'
     }
+    systemProperty 'allure.results.directory', 'build/allure-results'
+    systemProperty 'allure.link.issue.pattern', 'https://github.com/artembashlak/testingbase/issues{}'
+    systemProperty 'allure.link.tms.pattern', 'https://github.com/artembashlak/testingbase/issues{}'
+}
+
+test.dependsOn copyConfig
+
+allure {
+    autoconfigure = true
+    version = '2.4.1'
 }
